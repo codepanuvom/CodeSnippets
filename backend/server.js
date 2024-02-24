@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Set your GitHub token here
-const githubToken = 'solla_maaten'; // Replace with your actual GitHub token
+const githubToken = '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'; // Replace with your actual GitHub token
 
 app.get('/api/snippets', async (req, res) => {
   const repoOwner = 'codepanuvom';
