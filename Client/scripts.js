@@ -1,17 +1,18 @@
-const codeSnippets = [
-    'const greeting = "Hello, World!";',
-    'for (let i = 0; i < 5; i++) { console.log(i); }',
-    'function add(a, b) { return a + b; }',
-    '// Your custom code snippets go here...'
-];
-
-function displayCodeSnippets() {
-    const codeContainer = document.getElementById('codeContainer');
-    codeSnippets.forEach((snippet, index) => {
-        const codeElement = document.createElement('pre');
-        codeElement.textContent = snippet;
-        codeContainer.appendChild(codeElement);
-    });
-}
-
-window.onload = displayCodeSnippets;
+document.addEventListener('DOMContentLoaded', () => {
+    const snippetsContainer = document.getElementById('snippets-container');
+  
+    // Fetch snippets from the server
+    fetch('/api/snippets')
+      .then(response => response.json())
+      .then(snippets => {
+        snippets.forEach(snippet => {
+          const snippetElement = document.createElement('div');
+          snippetElement.innerHTML = `<h2>${snippet.name}</h2><pre>${snippet.content}</pre>`;
+          snippetsContainer.appendChild(snippetElement);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching snippets:', error.message);
+      });
+  });
+  
