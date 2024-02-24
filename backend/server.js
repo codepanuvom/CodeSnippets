@@ -1,9 +1,11 @@
 const axios = require('axios');
-const fs = require('fs').promises;
 const express = require('express');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Set your GitHub token here
+const githubToken = 'solla_maaten'; // Replace with your actual GitHub token
 
 app.get('/api/snippets', async (req, res) => {
   const repoOwner = 'codepanuvom';
@@ -11,10 +13,18 @@ app.get('/api/snippets', async (req, res) => {
   const folderPath = 'snippets';
 
   try {
-    const response = await axios.get(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`);
-    
+    const response = await axios.get(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`, {
+      headers: {
+        Authorization: `Bearer ${githubToken}`,
+      },
+    });
+
     const snippets = await Promise.all(response.data.map(async item => {
-      const contentResponse = await axios.get(item.download_url);
+      const contentResponse = await axios.get(item.download_url, {
+        headers: {
+          Authorization: `Bearer ${githubToken}`,
+        },
+      });
       return { name: item.name, content: contentResponse.data };
     }));
 
@@ -26,5 +36,5 @@ app.get('/api/snippets', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is oddifying on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

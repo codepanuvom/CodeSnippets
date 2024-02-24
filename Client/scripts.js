@@ -7,9 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
       .then(snippets => {
         snippets.forEach(snippet => {
           const snippetElement = document.createElement('div');
-          snippetElement.innerHTML = `<h2>${snippet.name}</h2><pre>${snippet.content}</pre>`;
+          snippetElement.innerHTML = `<h2>${snippet.name}</h2><pre><code class="language-javascript">${snippet.content}</code></pre>`;
           snippetsContainer.appendChild(snippetElement);
         });
+  
+        // Call Prism to highlight code
+        Prism.highlightAll();
       })
       .catch(error => {
         console.error('Error fetching snippets:', error.message);
