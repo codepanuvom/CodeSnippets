@@ -1,4 +1,3 @@
-// Sample code snippets
 const codeSnippets = [
     'const greeting = "Hello, World!";',
     'for (let i = 0; i < 5; i++) { console.log(i); }',
@@ -6,7 +5,6 @@ const codeSnippets = [
     '// Your custom code snippets go here...'
 ];
 
-// Function to display code snippets
 function displayCodeSnippets() {
     const codeContainer = document.getElementById('codeContainer');
     codeSnippets.forEach((snippet, index) => {
@@ -16,5 +14,4 @@ function displayCodeSnippets() {
     });
 }
 
-// Display code snippets when the page loads
 window.onload = displayCodeSnippets;
