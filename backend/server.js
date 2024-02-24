@@ -1,15 +1,21 @@
-const express = require('express');
 const axios = require('axios');
+const fs = require('fs').promises;
+const express = require('express');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.get('/api/snippets', async (req, res) => {
+  const repoOwner = 'codepanuvom';
+  const repoName = 'CodeSnippets';
+  const folderPath = 'snippets';
+
   try {
-    const response = await axios.get('https://api.github.com/repos/codepanuvom/CodeSnippets/contents/snippets');
-    const snippets = response.data.map(item => ({
-      name: item.name,
-      download_url: item.download_url,
+    const response = await axios.get(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`);
+    
+    const snippets = await Promise.all(response.data.map(async item => {
+      const contentResponse = await axios.get(item.download_url);
+      return { name: item.name, content: contentResponse.data };
     }));
 
     res.json(snippets);
