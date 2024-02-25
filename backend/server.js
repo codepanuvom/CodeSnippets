@@ -5,10 +5,10 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Set your GitHub token here
-const githubToken = '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'; // Replace with your actual GitHub token
+const githubToken = process.env.GITHUB_TOKEN || null; // Replace with your actual GitHub token
 
 app.get('/api/snippets', async (req, res) => {
-  const repoOwner = 'codepanuvom';
+  const repoOwner = 'FangChat';
   const repoName = 'CodeSnippets';
   const folderPath = 'snippets';
 

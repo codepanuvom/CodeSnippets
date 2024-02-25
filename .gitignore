@@ -11,3 +11,6 @@ logs/
 # Build results
 dist/
 build/
+
+#ENV Files
+.env
