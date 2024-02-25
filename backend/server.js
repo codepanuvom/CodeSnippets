@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 const axios = require('axios');
 const express = require('express');
 
@@ -40,4 +38,3 @@ app.get('/api/snippets', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
->>>>>>> 11968e8 (added all files back)
