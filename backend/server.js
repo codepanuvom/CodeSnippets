@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 app.get('/api/snippets', async (req, res) => {
   const repoOwner = 'Ajaybalajiprasad';
   const repoName = 'CodeSnippets';
-  const folderPath = 'Snippets';
+  const folderPath = 'snippets';
 
   try {
     const response = await axios.get(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${folderPath}`, {
