@@ -5,7 +5,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Set your GitHub token here
-const githubToken = process.env.GITHUB_TOKEN || null; // Replace with your actual GitHub token
+const githubToken = atob(process.env.GITHUB_TOKEN) || null; // Replace with your actual GitHub token
 
 app.get('/api/snippets', async (req, res) => {
   const repoOwner = 'FangChat';
