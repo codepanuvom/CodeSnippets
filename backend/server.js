@@ -1,5 +1,6 @@
 const axios = require('axios');
 const express = require('express');
+const path = require('path');
 const dotenv = require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
@@ -7,8 +8,10 @@ const port = process.env.PORT || 3000;
 // Set your GitHub token here
 const githubToken = atob(process.env.GITHUB_TOKEN) || null; // Replace with your actual GitHub token
 
+app.use(express.static(path.join(__dirname, '../Client')));
+
 app.get('/', (req, res) => {
-  res.send('Hello, this is the root path!');
+  res.sendFile(path.join(__dirname, '../Client/index.html'));
 });
 
 app.get('/api/snippets', async (req, res) => {
