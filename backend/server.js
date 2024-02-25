@@ -7,6 +7,10 @@ const port = process.env.PORT || 3000;
 // Set your GitHub token here
 const githubToken = atob(process.env.GITHUB_TOKEN) || null; // Replace with your actual GitHub token
 
+app.get('/', (req, res) => {
+  res.send('Hello, this is the root path!');
+});
+
 app.get('/api/snippets', async (req, res) => {
   const repoOwner = 'FangChat';
   const repoName = 'CodeSnippets';

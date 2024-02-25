@@ -3,12 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Snippets</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" integrity="sha256-PO4RQDaPMj+LXVD6vrldzoOT2yZLvQ0sQjFETj7WUW0=" crossorigin="anonymous" />
+  <title>Code Snippets Viewer</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <div id="snippets-container"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha256-X1JTGFsI5j2dA0Tnq9jmq02iKvRCB99+K5N+P0QQzO0=" crossorigin="anonymous"></script>
-  <script src="script.js"></script>
+
+  <h1>Code Snippets</h1>
+  <div id="snippet-container"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async function () {
+      try {
+        const response = await fetch('/api/snippets');
+        const snippets = await response.json();
+
+        const snippetContainer = document.getElementById('snippet-container');
+
+        snippets.forEach(snippet => {
+          const snippetDiv = document.createElement('div');
+          snippetDiv.classList.add('snippet');
+
+          const codeTitle = document.createElement('h2');
+          codeTitle.innerText = snippet.name;
+
+          const codeContent = document.createElement('pre');
+          codeContent.innerText = snippet.content;
+
+          snippetDiv.appendChild(codeTitle);
+          snippetDiv.appendChild(codeContent);
+          snippetContainer.appendChild(snippetDiv);
+        });
+      } catch (error) {
+        console.error('Error fetching snippets:', error.message);
+      }
+    });
+  </script>
 </body>
 </html>
