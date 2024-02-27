@@ -42,7 +42,6 @@ const themeToggleButton = document.getElementById('theme-toggle');
         listItem.appendChild(copyButton);
         snippetList.appendChild(listItem);
 
-        // Apply syntax highlighting
         hljs.highlightBlock(codeElement);
       });
     } catch (error) {
